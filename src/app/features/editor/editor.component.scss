@@ -1,0 +1,57 @@
+.interactive-editor {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #0b0f19;
+  position: relative;
+  overflow: hidden;
+}
+
+.editor-gutter {
+  width: 52px;
+  background-color: #080b12;
+  border-right: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 1rem 0.75rem 1rem 0;
+  font-family: var(--font-family-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #475569;
+  user-select: none;
+  overflow: hidden;
+}
+
+.gutter-number {
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+}
+
+.editor-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-family-mono);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow: auto;
+  tab-size: 2;
+  caret-color: #60a5fa;
+
+  &::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+  }
+
+  &::placeholder {
+    color: #475569;
+    font-style: italic;
+  }
+}

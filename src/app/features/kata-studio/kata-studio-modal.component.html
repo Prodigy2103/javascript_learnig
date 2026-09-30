@@ -1,0 +1,79 @@
+@if (isVisible()) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">Kata Studio: Neue Aufgabe erstellen</h2>
+        <button type="button" class="btn-close" (click)="closeModal()">
+          <svg class="close-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        @if (errorMessage()) {
+          <div class="error-banner">{{ errorMessage() }}</div>
+        }
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Titel der Kata</label>
+            <input type="text" [(ngModel)]="title" placeholder="z. B. Debounce für Scroll-Events">
+          </div>
+
+          <div class="form-group">
+            <label>Phase / Lernstufe</label>
+            <select [(ngModel)]="stage">
+              <option [value]="1">Phase 1: Syntax & Context</option>
+              <option [value]="2">Phase 2: Async & Event Loop</option>
+              <option [value]="3">Phase 3: DOM & Web APIs</option>
+              <option [value]="4">Phase 4: Proxies & Generatoren</option>
+              <option [value]="5">Phase 5: Tooling & Testing</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Funktionsname</label>
+            <input type="text" [(ngModel)]="functionName" placeholder="z. B. customDebounce">
+          </div>
+
+          <div class="form-group full-width">
+            <label>Szenario & Aufgabenbeschreibung</label>
+            <textarea rows="2" [(ngModel)]="scenarioDescription" placeholder="Erkläre die didaktische Kata..."></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Starter Code (Template)</label>
+            <textarea rows="3" class="code-font" [(ngModel)]="starterCode"></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Musterlösung (Solution Code)</label>
+            <textarea rows="3" class="code-font" [(ngModel)]="solutionCode"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Test-Eingabe (JSON oder String)</label>
+            <input type="text" class="code-font" [(ngModel)]="testInputString" placeholder="z. B. [1, 2, 3]">
+          </div>
+
+          <div class="form-group">
+            <label>Erwarteter Rückgabewert (Expected)</label>
+            <input type="text" class="code-font" [(ngModel)]="testExpectedString" placeholder="z. B. 6">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="closeModal()">Abbrechen</button>
+        <button type="button" class="btn-submit" [disabled]="isSubmitting()" (click)="submitCustomKata()">
+          @if (isSubmitting()) {
+            Speichert...
+          } @else {
+            Kata in Supabase veröffentlichen
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,21 @@
+<div class="interactive-editor">
+  <div class="editor-gutter" #lineGutter>
+    @for (lineNumber of lineNumbers(); track lineNumber) {
+      <span class="gutter-number">{{ lineNumber }}</span>
+    }
+  </div>
+
+  <textarea
+    #codeTextarea
+    class="editor-textarea"
+    spellcheck="false"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    [value]="codeContent()"
+    (input)="handleCodeInput($event.target)"
+    (keydown)="handleKeydown($event)"
+    (scroll)="handleTextareaScroll()"
+    placeholder="// Schreibe hier deine JavaScript Funktion...">
+  </textarea>
+</div>

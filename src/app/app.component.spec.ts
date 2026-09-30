@@ -4,26 +4,31 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [AppComponent]
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should create the learning app component', () => {
+    const componentFixture = TestBed.createComponent(AppComponent);
+    const componentInstance = componentFixture.componentInstance;
+    expect(componentInstance).toBeTruthy();
   });
 
-  it(`should have the 'javascript_learnig' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('javascript_learnig');
+  it('should navigate to next task and update active task title', () => {
+    const componentFixture = TestBed.createComponent(AppComponent);
+    const componentInstance = componentFixture.componentInstance;
+
+    expect(componentInstance.currentTaskIndex()).toBe(0);
+    componentInstance.navigateToNextTask();
+
+    expect(componentInstance.currentTaskIndex()).toBe(1);
+    expect(componentInstance.activeTask().title).toContain('Template Literals');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, javascript_learnig');
+  it('should execute tests and produce an execution report', async () => {
+    const componentFixture = TestBed.createComponent(AppComponent);
+    const componentInstance = componentFixture.componentInstance;
+    await componentInstance.executeCodeTests();
+    expect(componentInstance.executionReport()).not.toBeNull();
   });
 });
